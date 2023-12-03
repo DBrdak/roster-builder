@@ -1,93 +1,63 @@
 import React from 'react';
 import { TextField, FormControl, Tooltip, FilledInputProps, InputProps, OutlinedInputProps } from '@mui/material';
 import { useField } from 'formik';
-import { observer } from 'mobx-react-lite';
 
 interface Props {
-    placeholder: string;
-    name: string;
-    showErrors?: any;
-    label?: string;
-    type?: string;
-    maxValue?: number;
-    minValue?: number;
-    inputProps?: Partial<FilledInputProps> | Partial<OutlinedInputProps> | Partial<InputProps>
-    style?: React.CSSProperties
-    disabled?: boolean
-    maxLength?: number
-    capitalize?: boolean
+    placeholder: string
+    name: string
+    label: string
+    maxValue: number
+    forbiddenValues: string[]
 }
 
-const MyTextInput: React.FC<Props> = ({ disabled, capitalize, maxLength, showErrors, maxValue, minValue, inputProps, type, style, ...props }) => {
+const MyTextInput: React.FC<Props> = ({ label, maxValue, forbiddenValues, ...props }) => {
     const [field, meta, helpers] = useField(props.name);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let value = e.target.value.replace(',', '.');
+        let value = e.target.value;
 
-        if (type === 'number') {
-            value = value.replace(/[^0-9.]/g, '');
+        // Remove non-digit and non-comma characters
+        value = value.replace(/[^0-9,]/g, '');
+
+        // Separate into numbers
+        const numbers = value.split(',');
+
+        // Filter each number to keep only 2 digits
+        let filteredNumbers = numbers.map((num) => num.slice(0, 2));
+
+        // Filter each number to not exceed max day value in month
+        if(filteredNumbers.some(num => parseInt(num) > maxValue))
+            filteredNumbers = filteredNumbers.map(num => String(Math.min(maxValue, parseInt(num))))
+
+        // Filter numbers to not contain duplicates
+        filteredNumbers = Array.from(new Set(filteredNumbers));
+        console.log(Array.from(forbiddenValues))
+        // Filter numbers to not contain forbidden values
+        filteredNumbers = filteredNumbers.map((num) => Array.from(forbiddenValues).some((fnum) => fnum === num) ? '' : num);
+
+        // Join the filtered numbers back with commas
+        value = filteredNumbers.join(',');
+
+        // Remove leading comma
+        if (value.startsWith(',')) {
+            value = value.slice(1);
         }
 
-        if (value !== '0') {
-            value = value.replace(/^0+/, '');
-        }
-
-        if (value.length > 0) {
-            value = value.charAt(0).toUpperCase() + value.slice(1);
-        }
-
-        if (maxValue && parseFloat(value) > maxValue) {
-            value = maxValue.toString();
-        }
-
-        if (minValue && parseFloat(value) < minValue) {
-            value = minValue.toString();
-        }
-
-        if(maxLength && value.length > maxLength) {
-             value = value.slice(0, maxLength)
-        }
-
-        if(capitalize) {
-            value = value.toUpperCase()
-        }
-
-        helpers.setValue(value);
+        helpers.setValue(value.split(','));
     };
 
     return (
-    showErrors ? (
-        <FormControl error={meta.touched && !!meta.error} fullWidth>
-            <Tooltip title={meta.touched && meta.error ? meta.error : ''} placement="right">
-                <TextField
-                    {...field}
-                    {...props}
-                    disabled={disabled}
-                    onChange={handleChange}
-                    label={props.label}
-                    variant="outlined"
-                    error={meta.touched && !!meta.error}
-                    InputProps={inputProps} 
-                    style={style}
-                />
-            </Tooltip>
-        </FormControl>
-    ) : (
         <FormControl error={meta.touched && !!meta.error} fullWidth>
             <TextField
                 {...field}
                 {...props}
-                disabled={disabled}
                 onChange={handleChange}
-                label={props.label}
+                label={label}
                 variant="outlined"
                 error={meta.touched && !!meta.error}
-                InputProps={inputProps} 
-                style={style}
             />
         </FormControl>
-    )
     );
 }
 
-export default observer(MyTextInput);
+export default MyTextInput;
