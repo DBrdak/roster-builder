@@ -1,4 +1,4 @@
-import {Container, Stack} from "@mui/material";
+import {Container} from "@mui/material";
 import {Content} from "./Content";
 
 export function MainPage() {
