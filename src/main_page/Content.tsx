@@ -15,6 +15,7 @@ export function Content() {
 
     async function handleFormSubmit(values: InitFormValues) {
         const factory = new SpreadsheetFactory(
+            values.spot,
             Month.fromValue(values.month),
             values.eventDays.map(day => parseInt(day)),
             values.closedDays.map(day => parseInt(day)))
@@ -41,7 +42,7 @@ export function Content() {
                                 onChange={handleChange}
                             >
                                 <MenuItem key={1} value={'D81'}>D81</MenuItem>
-                                <MenuItem key={2} value={'MDM'} disabled>MDM</MenuItem>
+                                <MenuItem key={2} value={'MDM'}>MDM</MenuItem>
                             </Select>
                         </FormControl>
                         {values.spot.length > 0 &&
