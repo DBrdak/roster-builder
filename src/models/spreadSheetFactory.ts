@@ -1,6 +1,5 @@
 import Month from "./month";
 import * as ExcelJS from 'exceljs'
-import {dark} from "@mui/material/styles/createPalette";
 
 export default class SpreadsheetFactory {
     private readonly _month: Month;

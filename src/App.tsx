@@ -1,4 +1,3 @@
-import React from 'react';
 import {MainPage} from "./main_page/MainPage";
 
 function App() {

@@ -24,7 +24,6 @@ export function Content() {
 
     return (
         <Formik
-            //validationSchema={}
             initialValues={initValues}
             onSubmit={async (values) => await handleFormSubmit(values)}
             validateOnMount={true}>
