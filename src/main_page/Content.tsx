@@ -4,18 +4,30 @@ import MyTextInput from "../components/MyTextInput";
 import Month from "../models/month";
 import InitFormValues from "../models/initFormValues";
 import SpreadsheetFactory from "../models/spreadSheetFactory";
+import * as Yup from 'yup';
 
-export function Content() {
+interface ContentProps {
+    selectedSpot: string
+}
+
+export function Content({selectedSpot}: ContentProps) {
     const initValues: InitFormValues = {
-        spot: '',
-        month: '',
+        month: Month.nextMonth().value,
         eventDays: [],
         closedDays: []
     }
 
+    const validationSchema = Yup.object().shape({
+        closedDays: Yup.array()
+            .test('Dni zamknięcia i dni eventowe muszą być zbiorami rozłącznymi', 'Dni zamknięcia i dni eventowe muszą być zbiorami rozłącznymi', function (closedDays) {
+                const eventDays: [] = this.resolve(Yup.ref('eventDays'));
+                return !eventDays.some((value) => closedDays?.includes(value));
+            }),
+    });
+
     async function handleFormSubmit(values: InitFormValues) {
         const factory = new SpreadsheetFactory(
-            values.spot,
+            selectedSpot,
             Month.fromValue(values.month),
             values.eventDays.map(day => parseInt(day)),
             values.closedDays.map(day => parseInt(day)))
@@ -23,8 +35,11 @@ export function Content() {
         await factory.createAndDownloadSpreadsheet()
     }
 
+    const color = selectedSpot === 'D81' ? 'primary' : 'secondary'
+
     return (
         <Formik
+            validationSchema={validationSchema}
             initialValues={initValues}
             onSubmit={async (values) => await handleFormSubmit(values)}
             validateOnMount={true}>
@@ -32,21 +47,8 @@ export function Content() {
                 <Form style={{width: '100%'}} onSubmit={handleSubmit} autoComplete='off'>
                     <Stack direction={'column'} spacing={2}
                            style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                        <FormControl fullWidth>
-                            <InputLabel>Lokal</InputLabel>
-                            <Select
-                                id={'spot'}
-                                name={'spot'}
-                                value={values.spot}
-                                label="Lokal"
-                                onChange={handleChange}
-                            >
-                                <MenuItem key={1} value={'D81'}>D81</MenuItem>
-                                <MenuItem key={2} value={'MDM'}>MDM</MenuItem>
-                            </Select>
-                        </FormControl>
-                        {values.spot.length > 0 &&
-                            <FormControl fullWidth>
+                        {selectedSpot.length > 0 &&
+                            <FormControl fullWidth color={color}>
                                 <InputLabel>Miesiąc</InputLabel>
                                 <Select
                                     id={'month'}
@@ -61,7 +63,7 @@ export function Content() {
                                 </Select>
                             </FormControl>
                         }
-                        {values.month &&
+                        {values.month && selectedSpot &&
                             <>
                                 <MyTextInput
                                     placeholder={'Eventy'}
@@ -77,12 +79,11 @@ export function Content() {
                                     maxValue={Month.fromValue(values.month).days.size}
                                     forbiddenValues={values.eventDays}
                                 />
+                                <Button color={color} disabled={!(selectedSpot && values.month && isValid)} type={'submit'} onClick={() => handleSubmit} variant={'contained'}>
+                                    <Typography>Pobierz</Typography>
+                                </Button>
                             </>
                         }
-                        <Button
-                            disabled={!isValid} type={'submit'} onClick={() => handleSubmit} variant={'contained'}>
-                            <Typography>Pobierz</Typography>
-                        </Button>
                     </Stack>
                 </Form>
             )}

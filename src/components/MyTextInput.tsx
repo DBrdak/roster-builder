@@ -14,6 +14,8 @@ const MyTextInput: React.FC<Props> = ({ label, maxValue, forbiddenValues, ...pro
     const [field, meta, helpers] = useField(props.name);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        forbiddenValues = forbiddenValues.filter(fnum => parseInt(fnum))
+
         let value = e.target.value;
 
         // Remove non-digit and non-comma characters
@@ -31,9 +33,11 @@ const MyTextInput: React.FC<Props> = ({ label, maxValue, forbiddenValues, ...pro
 
         // Filter numbers to not contain duplicates
         filteredNumbers = Array.from(new Set(filteredNumbers));
-        console.log(Array.from(forbiddenValues))
+
         // Filter numbers to not contain forbidden values
-        filteredNumbers = filteredNumbers.map((num) => Array.from(forbiddenValues).some((fnum) => fnum === num) ? '' : num);
+        if(value.endsWith(',')) {
+            filteredNumbers = filteredNumbers.filter((num) => !Array.from(forbiddenValues).some((fnum) => fnum === num));
+        }
 
         // Join the filtered numbers back with commas
         value = filteredNumbers.join(',');
@@ -55,6 +59,7 @@ const MyTextInput: React.FC<Props> = ({ label, maxValue, forbiddenValues, ...pro
                 label={label}
                 variant="outlined"
                 error={meta.touched && !!meta.error}
+                style={{color: '#ffffff'}}
             />
         </FormControl>
     );

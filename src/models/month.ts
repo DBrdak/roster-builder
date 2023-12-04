@@ -74,6 +74,13 @@ export default class Month {
         }
     }
 
+    static nextMonth() : Month {
+        const currentMonthId = new Date().getMonth() + 1
+        const nextMonthId = currentMonthId + 1 > 12 ?
+            1 : currentMonthId + 1
+        return Month.fromId(nextMonthId)
+    }
+
     toString(): string {
         return `${this.value}`;
     }

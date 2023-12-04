@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9fa55efe-ee19-48ca-99f8-8442e70e7407" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main_page/SpotSelection.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MyTextInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyTextInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main_page/Content.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_page/Content.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/spreadSheetFactory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/spreadSheetFactory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main_page/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_page/MainPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/initFormValues.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/initFormValues.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/month.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/month.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +75,15 @@
       <recent name="D:\Programownie\Projekty\WorkArrangementBuilder\work-arrangement-builder-web\public" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="tart" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="start" />
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -80,6 +98,7 @@
       <workItem from="1701450774989" duration="11531000" />
       <workItem from="1701588011651" duration="185000" />
       <workItem from="1701589735435" duration="5764000" />
+      <workItem from="1701703946346" duration="9438000" />
     </task>
     <servers />
   </component>

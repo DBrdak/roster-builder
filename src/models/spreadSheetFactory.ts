@@ -34,7 +34,7 @@ export default class SpreadsheetFactory {
 
         const link = document.createElement('a');
         link.href = blobUrl;
-        link.download = `${this._spot} ${this._month} dyspo`;
+        link.download = `${this._spot} ${this._month} dyspo.xlsx`;
         link.click();
 
         URL.revokeObjectURL(blobUrl);

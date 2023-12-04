@@ -3,27 +3,18 @@ import { red } from '@mui/material/colors';
 
 const theme = createTheme({
   palette: {
-    background: {
-      default: '#E4E4E4'
-    },
+    mode: "dark",
     primary: {
-      main: '#C32B28',
+      main: '#FFC809',
     },
     secondary: {
-      main: '#FFFFFF',
+      main: '#F19FC4',
     },
-    info: {
-      main: '#2269d0'
-    },
-    text: {
-      primary: '#000000'
-    },
-    error: {
-      main: red.A400,
-    },
-
   },
   components: {
+    MuiButton: {
+
+    },
     MuiCssBaseline: {
       styleOverrides: {
         '*::-webkit-scrollbar': {
