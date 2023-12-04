@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9fa55efe-ee19-48ca-99f8-8442e70e7407" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main_page/SpotSelection.tsx" afterDir="false" />
+    <list default="true" id="9fa55efe-ee19-48ca-99f8-8442e70e7407" name="Changes" comment="UI/UX Improved">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/MyTextInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyTextInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main_page/Content.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_page/Content.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main_page/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_page/MainPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/initFormValues.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/initFormValues.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/month.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/month.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main_page/SpotSelection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_page/SpotSelection.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +24,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="9afab123-b459-404e-91fb-34e042b09c8c" />
+        <option name="url" value="https://github.com/DBrdak/work-arrangement-builder-web.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -98,11 +103,30 @@
       <workItem from="1701450774989" duration="11531000" />
       <workItem from="1701588011651" duration="185000" />
       <workItem from="1701589735435" duration="5764000" />
-      <workItem from="1701703946346" duration="9438000" />
+      <workItem from="1701703946346" duration="12770000" />
     </task>
+    <task id="LOCAL-00001" summary="UI/UX Improved">
+      <created>1701713698951</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1701713698951</updated>
+    </task>
+    <task id="LOCAL-00002" summary="UI/UX Improved">
+      <created>1701713795808</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1701713795808</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="UI/UX Improved" />
+    <option name="LAST_COMMIT_MESSAGE" value="UI/UX Improved" />
   </component>
 </project>

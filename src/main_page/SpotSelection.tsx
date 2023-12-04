@@ -19,18 +19,18 @@ const SpotSelection = ({onClick, selectedSpot}: Props) => {
         switch (selectedSpot) {
             case ("MDM"):
                 return {
-                    mdm: ['40vw', '400px', '36px'],
-                    d81: ['30vw', '300px', '28px']
+                    mdm: ['40vw', '400px', '36px', '1'],
+                    d81: ['30vw', '300px', '28px', '0.2']
                 }
             case ("D81"):
                 return {
-                    mdm: ['30vw', '300px', '28px'],
-                    d81: ['40vw', '400px', '36px']
+                    mdm: ['30vw', '300px', '28px', '0.2'],
+                    d81: ['40vw', '400px', '36px', '1']
                 }
             default:
                 return {
-                    mdm: ['40vw', '400px', '36px'],
-                    d81: ['40vw', '400px', '36px']
+                    mdm: ['40vw', '400px', '36px', '1'],
+                    d81: ['40vw', '400px', '36px', '1']
                 }
         }
     }
@@ -46,6 +46,7 @@ const SpotSelection = ({onClick, selectedSpot}: Props) => {
                     maxWidth: tileSize().d81[1],
                     maxHeight: tileSize().d81[1],
                     fontSize: tileSize().d81[2],
+                    opacity: tileSize().d81[3]
                 }}
                 onClick={() => handleTileClick('D81')}
             >
@@ -60,6 +61,7 @@ const SpotSelection = ({onClick, selectedSpot}: Props) => {
                     maxWidth: tileSize().mdm[1],
                     maxHeight: tileSize().mdm[1],
                     fontSize: tileSize().mdm[2],
+                    opacity: tileSize().mdm[3]
                 }}
                 onClick={() => handleTileClick('MDM')}
             >

@@ -23,6 +23,11 @@ export function Content({selectedSpot}: ContentProps) {
                 const eventDays: [] = this.resolve(Yup.ref('eventDays'));
                 return !eventDays.some((value) => closedDays?.includes(value));
             }),
+        eventDays: Yup.array()
+            .test('Dni zamknięcia i dni eventowe muszą być zbiorami rozłącznymi', 'Dni zamknięcia i dni eventowe muszą być zbiorami rozłącznymi', function (eventDays) {
+                const closedDays: [] = this.resolve(Yup.ref('closedDays'));
+                return !closedDays.some((value) => eventDays?.includes(value));
+            }),
     });
 
     async function handleFormSubmit(values: InitFormValues) {
@@ -36,6 +41,7 @@ export function Content({selectedSpot}: ContentProps) {
     }
 
     const color = selectedSpot === 'D81' ? 'primary' : 'secondary'
+    const hexcolor = selectedSpot === 'D81' ?'rgba(255,200,9,0.5)' : 'rgba(241,159,196,0.5)'
 
     return (
         <Formik
@@ -51,6 +57,7 @@ export function Content({selectedSpot}: ContentProps) {
                             <FormControl fullWidth color={color}>
                                 <InputLabel>Miesiąc</InputLabel>
                                 <Select
+                                    color={color}
                                     id={'month'}
                                     name={'month'}
                                     value={values.month}
@@ -58,7 +65,7 @@ export function Content({selectedSpot}: ContentProps) {
                                     onChange={handleChange}
                                 >
                                     {Month.All.map(m =>
-                                        <MenuItem key={m.id} value={m.value}>{m.value}</MenuItem>
+                                        <MenuItem key={m.id} value={m.value} style={{backgroundColor: m.value === values.month ? hexcolor : 'inherit' }}>{m.value}</MenuItem>
                                     )}
                                 </Select>
                             </FormControl>
@@ -71,6 +78,7 @@ export function Content({selectedSpot}: ContentProps) {
                                     label={'Eventy'}
                                     maxValue={Month.fromValue(values.month).days.size}
                                     forbiddenValues={values.closedDays}
+                                    color={color}
                                 />
                                 <MyTextInput
                                     placeholder={'Dni zamknięte'}
@@ -78,6 +86,7 @@ export function Content({selectedSpot}: ContentProps) {
                                     label={'Dni zamknięte'}
                                     maxValue={Month.fromValue(values.month).days.size}
                                     forbiddenValues={values.eventDays}
+                                    color={color}
                                 />
                                 <Button color={color} disabled={!(selectedSpot && values.month && isValid)} type={'submit'} onClick={() => handleSubmit} variant={'contained'}>
                                     <Typography>Pobierz</Typography>

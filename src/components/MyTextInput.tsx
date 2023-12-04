@@ -8,9 +8,10 @@ interface Props {
     label: string
     maxValue: number
     forbiddenValues: string[]
+    color: 'primary' | 'secondary'
 }
 
-const MyTextInput: React.FC<Props> = ({ label, maxValue, forbiddenValues, ...props }) => {
+const MyTextInput: React.FC<Props> = ({ label, maxValue, color, forbiddenValues, ...props }) => {
     const [field, meta, helpers] = useField(props.name);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,6 +56,7 @@ const MyTextInput: React.FC<Props> = ({ label, maxValue, forbiddenValues, ...pro
             <TextField
                 {...field}
                 {...props}
+                color={color}
                 onChange={handleChange}
                 label={label}
                 variant="outlined"
