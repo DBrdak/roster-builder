@@ -218,7 +218,7 @@ export default class SpreadsheetFactory {
         worksheet.getCell(1,1).alignment = {horizontal: 'center'}
         let i = 2
 
-        this._month.days.forEach((day, dayIndex) => {
+        this._month.days.forEach((day) => {
             if(day.id === 1 || isInit){
 
                 worksheet.getCell(i,1).value = '10:00 - 16:00 BAR'
@@ -241,7 +241,7 @@ export default class SpreadsheetFactory {
         worksheet.getCell(1,1).alignment = {horizontal: 'center'}
         let i = 2
 
-        this._month.days.forEach((day, dayIndex) => {
+        this._month.days.forEach((day) => {
             if(day.id === 1 || isInit){
 
                 worksheet.getCell(i,1).value = '8:00 - 14:00'
