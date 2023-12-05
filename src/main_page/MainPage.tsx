@@ -22,7 +22,7 @@ export function MainPage() {
                 minHeight: '100vh',
                 minWidth: '100vw',
                 display: 'flex',
-                padding: '50px',
+                padding: isMobile ? "5px" : '50px',
                 justifyContent: 'center',
                 alignItems: 'center',
                 flexDirection: 'column'
