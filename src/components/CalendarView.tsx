@@ -64,7 +64,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ month, onEventDayClick, onC
 
     const daysOfWeekHeaders = Day.All.map((day) => (
         <TableCell key={day.id}>
-            <Typography variant="body2" style={{width: '30px', textAlign: 'center'}}>{day.shorthand}</Typography>
+            <Typography variant="body2" style={{width: '100%', textAlign: 'center'}}>{day.shorthand}</Typography>
         </TableCell>
     ));
 

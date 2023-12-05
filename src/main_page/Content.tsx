@@ -60,10 +60,10 @@ export function Content({selectedSpot}: ContentProps) {
             validateOnMount={true}>
             {({handleSubmit, handleChange, values}) => (
                 <Form style={{width: '100%'}} onSubmit={handleSubmit} autoComplete='off'>
-                    <Stack direction={'column'} spacing={2}
+                    <Stack direction={'column'} spacing={5}
                            style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                         {selectedSpot.length > 0 &&
-                            <FormControl fullWidth color={color}>
+                            <FormControl style={{minWidth: '50%', maxWidth: '75%'}} color={color}>
                                 <InputLabel>Miesiąc</InputLabel>
                                 <Select
                                     color={color}

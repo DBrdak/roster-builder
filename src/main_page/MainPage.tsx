@@ -1,7 +1,7 @@
-import {Container, Typography, useMediaQuery} from "@mui/material";
+import {Stack, Typography, useMediaQuery} from "@mui/material";
 import {Content} from "./Content";
 import SpotSelection from "./SpotSelection";
-import {useState} from "react";
+import React, {useState} from "react";
 import theme from "../theme";
 
 export function MainPage() {
@@ -9,16 +9,23 @@ export function MainPage() {
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
-        <div style={{ margin: 0, padding: 0, backgroundColor: '#121212' }}>
-            <Container style={{
-            minHeight: '100vh',
-            minWidth: '100vw',
-            display: 'flex',
-            padding: '50px',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            gap: 60
+        <div style={{
+            margin: 0,
+            padding: 0,
+            backgroundColor: '#121212',
+            overflowX: 'hidden',
+            overflowY: 'auto'
+        }}>
+            <Stack
+                spacing={8}
+                style={{
+                minHeight: '100vh',
+                minWidth: '100vw',
+                display: 'flex',
+                padding: '50px',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column'
             }}>
                 {isMobile ?
                     <>
@@ -45,7 +52,7 @@ export function MainPage() {
                         </div>
                     </>
                 }
-            </Container>
+            </Stack>
         </div>
     );
 }
