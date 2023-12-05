@@ -1,19 +1,21 @@
 export default class Day {
     id: number;
     value: string;
+    shorthand: string
 
-    private constructor(id: number, value: string) {
+    private constructor(id: number, value: string, shorthand: string) {
         this.id = id;
         this.value = value;
+        this.shorthand = shorthand
     }
 
-    static readonly Monday = new Day(1, "Poniedziałek");
-    static readonly Tuesday = new Day(2, "Wtorek");
-    static readonly Wednesday = new Day(3, "Środa");
-    static readonly Thursday = new Day(4, "Czwartek");
-    static readonly Friday = new Day(5, "Piątek");
-    static readonly Saturday = new Day(6, "Sobota");
-    static readonly Sunday = new Day(7, "Niedziela");
+    static readonly Monday = new Day(1, "Poniedziałek", 'Pn');
+    static readonly Tuesday = new Day(2, "Wtorek", 'Wt');
+    static readonly Wednesday = new Day(3, "Środa", 'Śr');
+    static readonly Thursday = new Day(4, "Czwartek", 'Czw');
+    static readonly Friday = new Day(5, "Piątek", 'Pt');
+    static readonly Saturday = new Day(6, "Sobota", 'Sob');
+    static readonly Sunday = new Day(7, "Niedziela", 'Niedz');
 
     static readonly All: Day[] = [
         Day.Monday,

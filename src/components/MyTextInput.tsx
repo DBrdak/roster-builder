@@ -7,7 +7,7 @@ interface Props {
     name: string
     label: string
     maxValue: number
-    forbiddenValues: string[]
+    forbiddenValues: number[]
     color: 'primary' | 'secondary'
 }
 
@@ -15,7 +15,7 @@ const MyTextInput: React.FC<Props> = ({ label, maxValue, color, forbiddenValues,
     const [field, meta, helpers] = useField(props.name);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        forbiddenValues = forbiddenValues.filter(fnum => parseInt(fnum))
+        forbiddenValues = forbiddenValues.filter(fnum => fnum)
 
         let value = e.target.value;
 
@@ -37,7 +37,7 @@ const MyTextInput: React.FC<Props> = ({ label, maxValue, color, forbiddenValues,
 
         // Filter numbers to not contain forbidden values
         if(value.endsWith(',')) {
-            filteredNumbers = filteredNumbers.filter((num) => !Array.from(forbiddenValues).some((fnum) => fnum === num));
+            filteredNumbers = filteredNumbers.filter((num) => !Array.from(forbiddenValues).some((fnum) => fnum === parseInt(num)));
         }
 
         // Join the filtered numbers back with commas
@@ -48,7 +48,7 @@ const MyTextInput: React.FC<Props> = ({ label, maxValue, color, forbiddenValues,
             value = value.slice(1);
         }
 
-        helpers.setValue(value.split(','));
+        helpers.setValue(value.split(',').map(x => parseInt(x)));
     };
 
     return (

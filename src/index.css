@@ -23,3 +23,19 @@ code {
   opacity: 1;
   height: 40%;
 }
+
+.calendar-day {
+  padding: 10px;
+  text-align: center;
+  width: 30px;
+  transition: background-color 0.3s ease;
+}
+
+.calendar-day:hover {
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+
+.calendar-day:active {
+  background-color: #c0c0c0;
+}

@@ -1,41 +1,29 @@
-import {Button, FormControl, InputLabel, MenuItem, Select, Stack, Typography} from "@mui/material";
+import {Button, FormControl, InputLabel, MenuItem, Select, Stack, Typography, useMediaQuery} from "@mui/material";
 import {Form, Formik} from "formik";
-import MyTextInput from "../components/MyTextInput";
 import Month from "../models/month";
-import InitFormValues from "../models/initFormValues";
 import SpreadsheetFactory from "../models/spreadSheetFactory";
-import * as Yup from 'yup';
+import theme from "../theme";
+import CalendarView from "../components/CalendarView";
+import {useState} from "react";
 
 interface ContentProps {
     selectedSpot: string
 }
 
 export function Content({selectedSpot}: ContentProps) {
-    const initValues: InitFormValues = {
+    const [eventDays, setEventDays] = useState<number[]>([])
+    const [closedDays, setClosedDays] = useState<number[]>([])
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+    const initValues = {
         month: Month.nextMonth().value,
-        eventDays: [],
-        closedDays: []
     }
 
-    const validationSchema = Yup.object().shape({
-        closedDays: Yup.array()
-            .test('Dni zamknięcia i dni eventowe muszą być zbiorami rozłącznymi', 'Dni zamknięcia i dni eventowe muszą być zbiorami rozłącznymi', function (closedDays) {
-                const eventDays: [] = this.resolve(Yup.ref('eventDays'));
-                return !eventDays.some((value) => closedDays?.includes(value));
-            }),
-        eventDays: Yup.array()
-            .test('Dni zamknięcia i dni eventowe muszą być zbiorami rozłącznymi', 'Dni zamknięcia i dni eventowe muszą być zbiorami rozłącznymi', function (eventDays) {
-                const closedDays: [] = this.resolve(Yup.ref('closedDays'));
-                return !closedDays.some((value) => eventDays?.includes(value));
-            }),
-    });
-
-    async function handleFormSubmit(values: InitFormValues) {
+    async function handleFormSubmit(values: {month: string}) {
         const factory = new SpreadsheetFactory(
             selectedSpot,
             Month.fromValue(values.month),
-            values.eventDays.map(day => parseInt(day)),
-            values.closedDays.map(day => parseInt(day)))
+            eventDays.map(day => day),
+            closedDays.map(day => day))
 
         await factory.createAndDownloadSpreadsheet()
     }
@@ -43,13 +31,34 @@ export function Content({selectedSpot}: ContentProps) {
     const color = selectedSpot === 'D81' ? 'primary' : 'secondary'
     const hexcolor = selectedSpot === 'D81' ?'rgba(255,200,9,0.5)' : 'rgba(241,159,196,0.5)'
 
+    function handleClosedClick(closedDayIndex: number) {
+        if(!eventDays.some(d => d === closedDayIndex) && !closedDays.some(d => d === closedDayIndex)){
+            setClosedDays([...closedDays, closedDayIndex])
+        } else if (closedDays.some(d => d === closedDayIndex)) {
+            setClosedDays(closedDays.filter(d => d !== closedDayIndex))
+        } else if(eventDays.some(d => d === closedDayIndex)) {
+            setEventDays(eventDays.filter(d => d !== closedDayIndex))
+            setClosedDays([...closedDays, closedDayIndex])
+        }
+    }
+
+    function handleEventClick(eventDayIndex: number) {
+        if(!eventDays.some(d => d === eventDayIndex) && !closedDays.some(d => d === eventDayIndex)){
+            setEventDays([...eventDays, eventDayIndex])
+        } else if (eventDays.some(d => d === eventDayIndex)) {
+            setEventDays(eventDays.filter(d => d !== eventDayIndex))
+        }else if(closedDays.some(d => d === eventDayIndex)) {
+            setClosedDays(eventDays.filter(d => d !== eventDayIndex))
+            setEventDays([...closedDays, eventDayIndex])
+        }
+    }
+
     return (
         <Formik
-            validationSchema={validationSchema}
             initialValues={initValues}
             onSubmit={async (values) => await handleFormSubmit(values)}
             validateOnMount={true}>
-            {({handleSubmit, handleChange, isValid, values}) => (
+            {({handleSubmit, handleChange, values}) => (
                 <Form style={{width: '100%'}} onSubmit={handleSubmit} autoComplete='off'>
                     <Stack direction={'column'} spacing={2}
                            style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
@@ -62,7 +71,11 @@ export function Content({selectedSpot}: ContentProps) {
                                     name={'month'}
                                     value={values.month}
                                     label="Miesiąc"
-                                    onChange={handleChange}
+                                    onChange={(event) => {
+                                        setClosedDays([])
+                                        setEventDays([])
+                                        handleChange(event)
+                                    }}
                                 >
                                     {Month.All.map(m =>
                                         <MenuItem key={m.id} value={m.value} style={{backgroundColor: m.value === values.month ? hexcolor : 'inherit' }}>{m.value}</MenuItem>
@@ -70,25 +83,16 @@ export function Content({selectedSpot}: ContentProps) {
                                 </Select>
                             </FormControl>
                         }
-                        {values.month && selectedSpot &&
+                        {values.month && selectedSpot && !isMobile &&
                             <>
-                                <MyTextInput
-                                    placeholder={'Eventy'}
-                                    name={'eventDays'}
-                                    label={'Eventy'}
-                                    maxValue={Month.fromValue(values.month).days.size}
-                                    forbiddenValues={values.closedDays}
-                                    color={color}
-                                />
-                                <MyTextInput
-                                    placeholder={'Dni zamknięte'}
-                                    name={'closedDays'}
-                                    label={'Dni zamknięte'}
-                                    maxValue={Month.fromValue(values.month).days.size}
-                                    forbiddenValues={values.eventDays}
-                                    color={color}
-                                />
-                                <Button color={color} disabled={!(selectedSpot && values.month && isValid)} type={'submit'} onClick={() => handleSubmit} variant={'contained'}>
+                                <CalendarView
+                                    month={Month.fromValue(values.month)}
+                                    eventDays={eventDays}
+                                    closedDays={closedDays}
+                                    onEventDayClick={(x) => handleEventClick(x)}
+                                    onClosedDayClick={(x) => handleClosedClick(x)}
+                                    color={color} />
+                                <Button color={color} disabled={!(selectedSpot && values.month)} type={'submit'} onClick={() => handleSubmit} variant={'contained'}>
                                     <Typography>Pobierz</Typography>
                                 </Button>
                             </>
