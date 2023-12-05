@@ -1,12 +1,24 @@
-import {Stack, Typography, useMediaQuery} from "@mui/material";
+import {Stack, Tooltip, Typography, useMediaQuery} from "@mui/material";
 import {Content} from "./Content";
 import SpotSelection from "./SpotSelection";
 import React, {useState} from "react";
 import theme from "../theme";
+import {Help} from "@mui/icons-material";
 
 export function MainPage() {
     const [selectedSpot, setSelectedSpot] = useState('');
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+    const manual =
+        [`Instrukcja:` ,
+        `1. Wybierz lokal dla którego chcesz wygenerować arkusz` ,
+        `2. Wybierz miesiąc (automatycznie zostanie wybrany miesiąc następny)` ,
+        `3. Zaznacz na widoku miesiąca dni w które będą eventy oraz dni w które nie pracujemy` ,
+        `    a) Eventy zaznaczasz lewym przyciskiem myszy(LPM)` ,
+        `    b) Dni zamknięcia zaznaczasz prawym przyciskiem myszy(PPM) lub ctrl+LPM` ,
+        `4. Kliknij pobierz aby wygenerować arkusz`].join(`\n`)
+
+    console.log(manual)
 
     return (
         <div style={{
@@ -50,6 +62,19 @@ export function MainPage() {
                         <div className={`content ${selectedSpot ? 'expanded' : ''}`}>
                             <Content selectedSpot={selectedSpot}/>
                         </div>
+
+                        <Tooltip title={
+                            <Typography color={'info'}>
+                                1) Wybierz lokal dla którego chcesz wygenerować arkusz<br/>
+                                2) Wybierz miesiąc (automatycznie zostanie wybrany miesiąc następny)<br/>
+                                3) Zaznacz na widoku miesiąca dni w które będą eventy oraz dni w które nie pracujemy<br/>
+                                3a) Eventy zaznaczasz lewym przyciskiem myszy(LPM)<br/>
+                                3b) Dni zamknięcia zaznaczasz prawym przyciskiem myszy(PPM) lub CTRL+LPM<br/>
+                                4) Kliknij pobierz aby wygenerować arkusz<br/>
+                            </Typography>}
+                        >
+                            <Help color={'info'} fontSize={'large'} />
+                        </Tooltip>
                     </>
                 }
             </Stack>

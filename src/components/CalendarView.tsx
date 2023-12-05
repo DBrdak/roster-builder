@@ -14,7 +14,12 @@ interface CalendarViewProps {
 
 const CalendarView: React.FC<CalendarViewProps> = ({ month, onEventDayClick, onClosedDayClick, eventDays, closedDays, color }) => {
     const colors =  {event: '#00FF00', closed: '#FF0000'}
-    const handleLeftClick = (dayId: number) => {
+    const handleLeftClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, dayId: number) => {
+        const isCtrlPressed = e.ctrlKey || e.metaKey;
+        if(isCtrlPressed){
+            onClosedDayClick(dayId)
+            return
+        }
         onEventDayClick(dayId)
     };
 
@@ -38,7 +43,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ month, onEventDayClick, onC
                             color: closedDays.some(d => d === index + 1) || eventDays.some(d => d === index + 1) ? '#FFFFFF' : 'inherit',
                             cursor: 'pointer'
                         }}
-                        onClick={() => handleLeftClick(index + 1)}
+                        onClick={(e) => handleLeftClick(e, index + 1)}
                         onContextMenu={(e) => {
                             e.preventDefault()
                             handleRightClick(index + 1);

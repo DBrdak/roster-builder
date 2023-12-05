@@ -1,0 +1,7 @@
+Instrukcja:
+1. Wybierz lokal dla którego chcesz wygenerować arkusz
+2. Wybierz miesiąc (automatycznie zostanie wybrany miesiąc następny)
+3. Zaznacz na widoku miesiąca dni w które będą eventy oraz dni w które nie pracujemy
+    a) Eventy zaznaczasz lewym przyciskiem myszy(LPM)
+    b) Dni zamknięcia zaznaczasz prawym przyciskiem myszy(PPM) lub ctrl+LPM
+4. Kliknij pobierz aby wygenerować arkusz

@@ -13,10 +13,12 @@ interface ContentProps {
 export function Content({selectedSpot}: ContentProps) {
     const [eventDays, setEventDays] = useState<number[]>([])
     const [closedDays, setClosedDays] = useState<number[]>([])
-    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const initValues = {
         month: Month.nextMonth().value,
     }
+    const color = selectedSpot === 'D81' ? 'primary' : 'secondary'
+    const hexcolor = selectedSpot === 'D81' ?'rgba(255,200,9,0.5)' : 'rgba(241,159,196,0.5)'
 
     async function handleFormSubmit(values: {month: string}) {
         const factory = new SpreadsheetFactory(
@@ -27,9 +29,6 @@ export function Content({selectedSpot}: ContentProps) {
 
         await factory.createAndDownloadSpreadsheet()
     }
-
-    const color = selectedSpot === 'D81' ? 'primary' : 'secondary'
-    const hexcolor = selectedSpot === 'D81' ?'rgba(255,200,9,0.5)' : 'rgba(241,159,196,0.5)'
 
     function handleClosedClick(closedDayIndex: number) {
         if(!eventDays.some(d => d === closedDayIndex) && !closedDays.some(d => d === closedDayIndex)){
@@ -48,8 +47,8 @@ export function Content({selectedSpot}: ContentProps) {
         } else if (eventDays.some(d => d === eventDayIndex)) {
             setEventDays(eventDays.filter(d => d !== eventDayIndex))
         }else if(closedDays.some(d => d === eventDayIndex)) {
-            setClosedDays(eventDays.filter(d => d !== eventDayIndex))
-            setEventDays([...closedDays, eventDayIndex])
+            setClosedDays(closedDays.filter(d => d !== eventDayIndex))
+            setEventDays([...eventDays, eventDayIndex])
         }
     }
 
