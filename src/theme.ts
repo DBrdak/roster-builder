@@ -14,9 +14,6 @@ const theme = createTheme({
     }
   },
   components: {
-    MuiButton: {
-
-    },
     MuiCssBaseline: {
       styleOverrides: {
         '*::-webkit-scrollbar': {

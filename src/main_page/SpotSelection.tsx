@@ -39,21 +39,6 @@ const SpotSelection = ({onClick, selectedSpot}: Props) => {
         <Stack spacing={5} direction={stackDir} width={'100%'} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             <Button
                 variant={'contained'}
-                color='primary'
-                style={{
-                    width: tileSize().d81[0],
-                    height: tileSize().d81[0],
-                    maxWidth: tileSize().d81[1],
-                    maxHeight: tileSize().d81[1],
-                    fontSize: tileSize().d81[2],
-                    opacity: tileSize().d81[3]
-                }}
-                onClick={() => handleTileClick('D81')}
-            >
-                D81
-            </Button>
-            <Button
-                variant={'contained'}
                 color='secondary'
                 style={{
                     width: tileSize().mdm[0],
@@ -66,6 +51,21 @@ const SpotSelection = ({onClick, selectedSpot}: Props) => {
                 onClick={() => handleTileClick('MDM')}
             >
                 MDM
+            </Button>
+            <Button
+                variant={'contained'}
+                color='primary'
+                style={{
+                    width: tileSize().d81[0],
+                    height: tileSize().d81[0],
+                    maxWidth: tileSize().d81[1],
+                    maxHeight: tileSize().d81[1],
+                    fontSize: tileSize().d81[2],
+                    opacity: tileSize().d81[3]
+                }}
+                onClick={() => handleTileClick('D81')}
+            >
+                D81
             </Button>
         </Stack>
     );

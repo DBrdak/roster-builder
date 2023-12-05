@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9fa55efe-ee19-48ca-99f8-8442e70e7407" name="Changes" comment="Clendar view added">
-      <change afterPath="$PROJECT_DIR$/public/manual.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/MyTextInput.tsx" afterDir="false" />
+    <list default="true" id="9fa55efe-ee19-48ca-99f8-8442e70e7407" name="Changes" comment="Some styling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CalendarView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CalendarView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main_page/Content.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_page/Content.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main_page/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_page/MainPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main_page/SpotSelection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_page/SpotSelection.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,6 +24,7 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -111,7 +108,7 @@
       <workItem from="1701703946346" duration="13168000" />
       <workItem from="1701731477486" duration="11887000" />
       <workItem from="1701743682106" duration="493000" />
-      <workItem from="1701810698304" duration="5606000" />
+      <workItem from="1701810698304" duration="6891000" />
     </task>
     <task id="LOCAL-00001" summary="UI/UX Improved">
       <created>1701713698951</created>
@@ -148,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701744156401</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Some styling">
+      <created>1701819167838</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701819167838</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,6 +163,7 @@
     <MESSAGE value="Calendar view added" />
     <MESSAGE value="Import cleanup" />
     <MESSAGE value="Clendar view added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Clendar view added" />
+    <MESSAGE value="Some styling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some styling" />
   </component>
 </project>
