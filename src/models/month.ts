@@ -14,7 +14,7 @@ export default class Month {
     private createDaysInMonth(): ReadonlyMap<number, Day> {
         const days = new Map<number, Day>();
         const now = new Date();
-        const isNextYear = now.getMonth() + 1 > this.id;
+        const isNextYear = now.getMonth() + 1 >= this.id;
         const year = isNextYear ? now.getFullYear() + 1 : now.getFullYear();
 
         const firstDayOfMonth = new Date(year, this.id - 1, 1);

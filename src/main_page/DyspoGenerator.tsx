@@ -1,24 +1,26 @@
-import {Button, FormControl, InputLabel, MenuItem, Select, Stack, Typography, useMediaQuery} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select, Stack, useMediaQuery} from "@mui/material";
 import {Form, Formik} from "formik";
 import Month from "../models/month";
 import SpreadsheetFactory from "../models/spreadSheetFactory";
 import theme from "../theme";
 import CalendarView from "../components/CalendarView";
 import {useState} from "react";
+import DownloadButton from "../components/DownloadButton";
 
 interface ContentProps {
     selectedSpot: string
 }
 
-export function Content({selectedSpot}: ContentProps) {
+export function DyspoGenerator({selectedSpot}: ContentProps) {
     const [eventDays, setEventDays] = useState<number[]>([])
     const [closedDays, setClosedDays] = useState<number[]>([])
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
     const initValues = {
         month: Month.nextMonth().value,
     }
     const color = selectedSpot === 'D81' ? 'primary' : 'secondary'
-    const hexcolor = selectedSpot === 'D81' ?'rgba(255,200,9,0.5)' : 'rgba(241,159,196,0.5)'
+    const hexcolor = selectedSpot === 'D81' ? 'rgba(255,200,9,0.5)' : 'rgba(241,159,196,0.5)'
 
     async function handleFormSubmit(values: {month: string}) {
         const factory = new SpreadsheetFactory(
@@ -65,6 +67,7 @@ export function Content({selectedSpot}: ContentProps) {
                             <FormControl style={{minWidth: '50%', maxWidth: '75%'}} color={color}>
                                 <InputLabel>Miesiąc</InputLabel>
                                 <Select
+                                    style={{textAlign: 'center'}}
                                     color={color}
                                     id={'month'}
                                     name={'month'}
@@ -77,7 +80,12 @@ export function Content({selectedSpot}: ContentProps) {
                                     }}
                                 >
                                     {Month.All.map(m =>
-                                        <MenuItem key={m.id} value={m.value} style={{backgroundColor: m.value === values.month ? hexcolor : 'inherit' }}>{m.value}</MenuItem>
+                                        <MenuItem key={m.id} value={m.value} style={{
+                                            backgroundColor: m.value === values.month ? hexcolor : 'inherit',
+                                            display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                        }}>
+                                            {m.value}
+                                        </MenuItem>
                                     )}
                                 </Select>
                             </FormControl>
@@ -91,9 +99,7 @@ export function Content({selectedSpot}: ContentProps) {
                                     onEventDayClick={(x) => handleEventClick(x)}
                                     onClosedDayClick={(x) => handleClosedClick(x)}
                                     color={color} />
-                                <Button color={color} disabled={!(selectedSpot && values.month)} type={'submit'} onClick={() => handleSubmit} variant={'contained'}>
-                                    <Typography>Pobierz</Typography>
-                                </Button>
+                                <DownloadButton disabled={!(selectedSpot && values.month)} color={color} handleClick={handleSubmit} reset={() => handleChange} />
                             </>
                         }
                     </Stack>
