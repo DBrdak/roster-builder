@@ -6,6 +6,7 @@ import theme from "../theme";
 import CalendarView from "../components/CalendarView";
 import {useState} from "react";
 import DownloadButton from "../components/DownloadButton";
+import {SpreadsheetSettings} from "../models/spreadsheetSettings";
 
 interface ContentProps {
     selectedSpot: string
@@ -27,7 +28,9 @@ export function DyspoGenerator({selectedSpot}: ContentProps) {
             selectedSpot,
             Month.fromValue(values.month),
             eventDays.map(day => day),
-            closedDays.map(day => day))
+            closedDays.map(day => day),
+            new SpreadsheetSettings()
+        )
 
         await factory.createAndDownloadSpreadsheet()
     }

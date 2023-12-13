@@ -1,17 +1,21 @@
 import Month from "./month";
 import * as ExcelJS from 'exceljs'
+import {SpreadsheetSettings} from "./spreadsheetSettings";
+import Day from "./day";
 
 export default class SpreadsheetFactory {
     private readonly _spot: string
     private readonly _month: Month;
     private readonly _eventDays: number[];
     private readonly _closedDays: number[];
+    private readonly _settings: SpreadsheetSettings
 
-    constructor(spot: string, month: Month, eventDays: number[], closedDays: number[]) {
+    constructor(spot: string, month: Month, eventDays: number[], closedDays: number[], settings: SpreadsheetSettings) {
         this._spot = spot
         this._month = month;
         this._eventDays = eventDays;
         this._closedDays = closedDays;
+        this._settings = settings
     }
 
     async createAndDownloadSpreadsheet() {
@@ -43,164 +47,36 @@ export default class SpreadsheetFactory {
     private async d81CreateSpreadsheet(worksheet: any): Promise<void> {
         let weekId = 1;
 
-        this.d81AddSideNavbar(worksheet)
+        this.addSideBar(worksheet)
 
         this._month.days.forEach((day, dayIndex) => {
             const dayOfWeekId = day.id;
             const isClosedDay = this._closedDays.includes(dayIndex);
             const isEventDay = this._eventDays.includes(dayIndex);
 
-            worksheet.getCell(weekId, dayOfWeekId + 1).value = `${day.value} ${dayIndex}`;
-            worksheet.getCell(weekId, dayOfWeekId + 1).fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: {argb: 'be56be'}
-            };
-            worksheet.getCell(weekId, dayOfWeekId + 1).border = {
-                top: {style: 'thin'},
-                left: {style: 'thin'},
-                right: {style: 'thin'},
-                bottom: {style: 'thin'}
-            };
-            worksheet.getCell(weekId, dayOfWeekId + 1).font = {bold: true};
-            worksheet.getCell(weekId, dayOfWeekId + 1).alignment = {horizontal: 'center'};
-
-            worksheet.getCell(weekId + 1, dayOfWeekId + 1).border = {
-                top: {style: 'thin'},
-                left: {style: 'thin'},
-                right: {style: 'thin'},
-                bottom: {style: 'thin'}
-            };
-            if (isClosedDay) worksheet.getCell(weekId + 1, dayOfWeekId + 1).fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: {argb: 'FFFF0000'}
-            };
-            worksheet.getCell(weekId + 2, dayOfWeekId + 1).border = {
-                top: {style: 'thin'},
-                left: {style: 'thin'},
-                right: {style: 'thin'},
-                bottom: {style: 'thin'}
-            };
-            if (isClosedDay) worksheet.getCell(weekId + 2, dayOfWeekId + 1).fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: {argb: 'FFFF0000'}
-            };
-            worksheet.getCell(weekId + 3, dayOfWeekId + 1).border = {
-                top: {style: 'thin'},
-                left: {style: 'thin'},
-                right: {style: 'thin'},
-                bottom: {style: 'thin'}
-            };
-            if (isClosedDay) worksheet.getCell(weekId + 3, dayOfWeekId + 1).fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: {argb: 'FFFF0000'}
-            };
-            if (isEventDay) worksheet.getCell(weekId + 3, dayOfWeekId + 1).fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: {argb: 'FF00FF00'}
-            };
+            this.addDayHeader(worksheet, weekId, dayOfWeekId, day, dayIndex, isEventDay)
+            this.addDayBody(worksheet, weekId, dayOfWeekId, isClosedDay, isEventDay)
 
             if (dayOfWeekId + 1 === 8) {
-                weekId += 4;
+                weekId += this.shifts().length + 1;
             }
-
-            worksheet.columns.forEach((c: any) => c.width = 24)
         })
+
+        worksheet.columns.forEach((c: any) => c.width = 24)
     }
 
     private async mdmCreateSpreadsheet(worksheet: any): Promise<void> {
         let weekId = 1;
 
-        this.mdmAddSideNavbar(worksheet)
+        this.addSideBar(worksheet)
 
         this._month.days.forEach((day, dayIndex) => {
             const dayOfWeekId = day.id;
             const isClosedDay = this._closedDays.includes(dayIndex);
             const isEventDay = this._eventDays.includes(dayIndex);
 
-            worksheet.getCell(weekId, dayOfWeekId + 1).value = `${day.value} ${dayIndex}`;
-            worksheet.getCell(weekId, dayOfWeekId + 1).fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: {argb: 'be56be'}
-            };
-            worksheet.getCell(weekId, dayOfWeekId + 1).border = {
-                top: {style: 'thin'},
-                left: {style: 'thin'},
-                right: {style: 'thin'},
-                bottom: {style: 'thin'}
-            };
-            worksheet.getCell(weekId, dayOfWeekId + 1).font = {bold: true};
-            worksheet.getCell(weekId, dayOfWeekId + 1).alignment = {horizontal: 'center'};
-            if(isEventDay) worksheet.getCell(weekId, dayOfWeekId + 1).fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: {argb: 'FF00FF00'}
-            };
-
-            worksheet.getCell(weekId + 1, dayOfWeekId + 1).border = {
-                top: {style: 'thin'},
-                left: {style: 'thin'},
-                right: {style: 'thin'},
-                bottom: {style: 'thin'}
-            };
-            if (isClosedDay) worksheet.getCell(weekId + 1, dayOfWeekId + 1).fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: {argb: 'FFFF0000'}
-            };
-
-            worksheet.getCell(weekId + 2, dayOfWeekId + 1).border = {
-                top: {style: 'thin'},
-                left: {style: 'thin'},
-                right: {style: 'thin'},
-                bottom: {style: 'thin'}
-            };
-            if (isClosedDay) worksheet.getCell(weekId + 2, dayOfWeekId + 1).fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: {argb: 'FFFF0000'}
-            };
-
-            worksheet.getCell(weekId + 3, dayOfWeekId + 1).border = {
-                top: {style: 'thin'},
-                left: {style: 'thin'},
-                right: {style: 'thin'},
-                bottom: {style: 'thin'}
-            };
-            if (isClosedDay) worksheet.getCell(weekId + 3, dayOfWeekId + 1).fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: {argb: 'FFFF0000'}
-            };
-
-            worksheet.getCell(weekId + 4, dayOfWeekId + 1).border = {
-                top: {style: 'thin'},
-                left: {style: 'thin'},
-                right: {style: 'thin'},
-                bottom: {style: 'thin'}
-            };
-            if (isClosedDay) worksheet.getCell(weekId + 4, dayOfWeekId + 1).fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: {argb: 'FFFF0000'}
-            };
-
-            worksheet.getCell(weekId + 5, dayOfWeekId + 1).border = {
-                top: {style: 'thin'},
-                left: {style: 'thin'},
-                right: {style: 'thin'},
-                bottom: {style: 'thin'}
-            };
-            if (isClosedDay) worksheet.getCell(weekId + 5, dayOfWeekId + 1).fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: {argb: 'FFFF0000'}
-            };
+            this.addDayHeader(worksheet, weekId, dayOfWeekId, day, dayIndex, isEventDay)
+            this.addDayBody(worksheet, weekId, dayOfWeekId, isClosedDay, isEventDay)
 
             if (dayOfWeekId + 1 === 8) {
                 weekId += 6;
@@ -210,7 +86,7 @@ export default class SpreadsheetFactory {
         })
     }
 
-    private mdmAddSideNavbar(worksheet: any) {
+    private addSideBar(worksheet: any) {
         let isInit = true
 
         worksheet.getCell(1,1).value = `${this._month.value}`
@@ -221,36 +97,67 @@ export default class SpreadsheetFactory {
         this._month.days.forEach((day) => {
             if(day.id === 1 || isInit){
 
-                worksheet.getCell(i,1).value = '10:00 - 16:00 BAR'
-                worksheet.getCell(i+1,1).value = '10:00 - 16:00 KUCHNIA'
-                worksheet.getCell(i+2,1).value = '13:00 - 17:00 POMOC'
-                worksheet.getCell(i+3,1).value = '16:00 - 21:00 BAR'
-                worksheet.getCell(i+4,1).value = '16:00 - 21:00 KUCHNIA'
+                this.shifts().forEach((shift, index) => {
+                    worksheet.getCell(i + index, 1).value = `${shift.workingHours.start} - ${shift.workingHours.end} ${shift.name ? shift.name : ''}`
+                })
 
                 isInit = false
-                i += 6
+                i += this.shifts().length +1
             }
         })
     }
 
-    private d81AddSideNavbar(worksheet: any) {
-        let isInit = true
+    private addDayHeader(worksheet: any, weekId: number, dayOfWeekId: number, day: Day, dayIndex: number, isEventDay: boolean){
+        worksheet.getCell(weekId, dayOfWeekId + 1).value = `${day.value} ${dayIndex}`;
+        worksheet.getCell(weekId, dayOfWeekId + 1).fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: {argb: 'be56be'}
+        };
+        worksheet.getCell(weekId, dayOfWeekId + 1).border = {
+            top: {style: 'thin'},
+            left: {style: 'thin'},
+            right: {style: 'thin'},
+            bottom: {style: 'thin'}
+        };
+        worksheet.getCell(weekId, dayOfWeekId + 1).font = {bold: true};
+        worksheet.getCell(weekId, dayOfWeekId + 1).alignment = {horizontal: 'center'};
 
-        worksheet.getCell(1,1).value = `${this._month.value}`
-        worksheet.getCell(1,1).font = {bold: true}
-        worksheet.getCell(1,1).alignment = {horizontal: 'center'}
-        let i = 2
+        if(isEventDay && !this.isEventOnLastShift()){
+            worksheet.getCell(weekId, dayOfWeekId + 1).fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: {argb: 'FF00FF00'}
+            };
+        }
+    }
 
-        this._month.days.forEach((day) => {
-            if(day.id === 1 || isInit){
+    private addDayBody(worksheet: any,  weekId: number, dayOfWeekId: number, isClosedDay: boolean, isEventDay: boolean){
 
-                worksheet.getCell(i,1).value = '8:00 - 14:00'
-                worksheet.getCell(i+1,1).value = '9:00 - 17:00'
-                worksheet.getCell(i+2,1).value = '13:45 - 20:00'
+        this.shifts().forEach((shift, index) => {
+            worksheet.getCell(weekId + 1 + index, dayOfWeekId + 1).border = {
+                top: {style: 'thin'},
+                left: {style: 'thin'},
+                right: {style: 'thin'},
+                bottom: {style: 'thin'}
+            };
 
-                isInit = false
-                i += 4
+            if (isClosedDay) worksheet.getCell(weekId + 1 + index, dayOfWeekId + 1).fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: {argb: 'FFFF0000'}
+            };
+
+            if(isEventDay && this.isEventOnLastShift() && index === this.shifts().length - 1){
+                worksheet.getCell(weekId + 1 + index, dayOfWeekId + 1).fill = {
+                    type: 'pattern',
+                    pattern: 'solid',
+                    fgColor: {argb: 'FF00FF00'}
+                };
             }
         })
     }
+
+    private shifts = () => this._settings.getShifts(this._spot)!
+    private isEventOnLastShift = () => this._settings.getIsEventOnLastDay(this._spot)!
 }
