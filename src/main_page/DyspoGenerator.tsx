@@ -6,13 +6,12 @@ import theme from "../theme";
 import CalendarView from "../components/CalendarView";
 import {useState} from "react";
 import DownloadButton from "../components/DownloadButton";
-import {SpreadsheetSettings} from "../models/spreadsheetSettings";
+import {useStore} from "../stores/store";
+import {observer} from "mobx-react-lite";
 
-interface ContentProps {
-    selectedSpot: string
-}
-
-export function DyspoGenerator({selectedSpot}: ContentProps) {
+export default observer( function  DyspoGenerator() {
+    const {commonStore  } = useStore()
+    const {selectedSpot} = commonStore
     const [eventDays, setEventDays] = useState<number[]>([])
     const [closedDays, setClosedDays] = useState<number[]>([])
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -29,7 +28,7 @@ export function DyspoGenerator({selectedSpot}: ContentProps) {
             Month.fromValue(values.month),
             eventDays.map(day => day),
             closedDays.map(day => day),
-            new SpreadsheetSettings()
+            commonStore.settings
         )
 
         await factory.createAndDownloadSpreadsheet()
@@ -110,4 +109,4 @@ export function DyspoGenerator({selectedSpot}: ContentProps) {
             )}
         </Formik>
     );
-}
+})

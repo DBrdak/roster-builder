@@ -45,7 +45,7 @@ export class SpreadsheetSettings {
         this.isEventOnLastShift.set('MDM', false)
     }
 
-    public setCustom(shifts: Shift[], spot: string){
+    public setCustomShifts(shifts: Shift[], spot: string){
         this.shifts.set(spot, shifts)
     }
 
@@ -53,7 +53,7 @@ export class SpreadsheetSettings {
         const shifts = this.shifts.get(spot)?.values()
 
         if(!shifts){
-            return null
+            return []
         }
 
         return Array.from(shifts)

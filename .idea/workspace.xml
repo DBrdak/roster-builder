@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9fa55efe-ee19-48ca-99f8-8442e70e7407" name="Changes" comment="Refactor 02">
-      <change afterPath="$PROJECT_DIR$/src/components/SettingsBadge.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/primitives/spreadsheetSettings.ts" afterDir="false" />
+    <list default="true" id="9fa55efe-ee19-48ca-99f8-8442e70e7407" name="Changes" comment="Settings Feature Implementation 01">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SettingsBadge.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SettingsForm.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SettingsModal.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SpotSelection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SpotSelection.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main_page/DesktopPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_page/DesktopPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main_page/DyspoGenerator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_page/DyspoGenerator.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/spreadSheetFactory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/spreadSheetFactory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/spreadsheetSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/spreadsheetSettings.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stores/commonStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/commonStore.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +60,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;js.last.introduce.type&quot;: &quot;LET&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Programownie/Projekty/WorkArrangementBuilder/work-arrangement-builder-web/public&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Programownie/Projekty/WorkArrangementBuilder/work-arrangement-builder-web/src/components&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -77,11 +80,13 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Programownie\Projekty\WorkArrangementBuilder\work-arrangement-builder-web\public" />
       <recent name="D:\Programownie\Projekty\WorkArrangementBuilder\work-arrangement-builder-web\src\components" />
+      <recent name="D:\Programownie\Projekty\WorkArrangementBuilder\work-arrangement-builder-web\public" />
       <recent name="D:\Programownie\Projekty\WorkArrangementBuilder\work-arrangement-builder-web\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programownie\Projekty\WorkArrangementBuilder\work-arrangement-builder-web\src\models" />
+      <recent name="D:\Programownie\Projekty\WorkArrangementBuilder\work-arrangement-builder-web\src\stores" />
       <recent name="D:\Programownie\Projekty\WorkArrangementBuilder\work-arrangement-builder-web\src\components" />
       <recent name="D:\Programownie\Projekty\WorkArrangementBuilder\work-arrangement-builder-web\public" />
     </key>
@@ -117,7 +122,8 @@
       <workItem from="1702077331790" duration="7540000" />
       <workItem from="1702304897202" duration="699000" />
       <workItem from="1702412183034" duration="52000" />
-      <workItem from="1702429550100" duration="4440000" />
+      <workItem from="1702429550100" duration="6774000" />
+      <workItem from="1702473558420" duration="6180000" />
     </task>
     <task id="LOCAL-00001" summary="UI/UX Improved">
       <created>1701713698951</created>
@@ -189,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702412220126</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Settings Feature Implementation 01">
+      <created>1702436404478</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1702436404478</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,6 +217,7 @@
     <MESSAGE value="Refactor 01" />
     <MESSAGE value="Logo change" />
     <MESSAGE value="Refactor 02" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor 02" />
+    <MESSAGE value="Settings Feature Implementation 01" />
+    <option name="LAST_COMMIT_MESSAGE" value="Settings Feature Implementation 01" />
   </component>
 </project>

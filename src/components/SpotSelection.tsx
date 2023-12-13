@@ -1,20 +1,15 @@
-import {Button, Stack, useMediaQuery} from "@mui/material";
-import theme from "../theme";
+import {Button, Stack} from "@mui/material";
 import {SpotButtonStyles, SpotButtonStylesBuilder} from "../models/primitives/spotButtonStyles";
+import {useStore} from "../stores/store";
+import {observer} from "mobx-react-lite";
 
-interface Props {
-    selectedSpot: string
-    onClick: (spot: string) => void
-}
-
-const SpotSelection = ({onClick, selectedSpot}: Props) => {
-    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+const SpotSelection = () => {
+    const {commonStore} = useStore()
+    const {selectedSpot} = commonStore
 
     const handleTileClick = (spot: string) => {
-        onClick(spot)
+        commonStore.setSelectedSpot(spot)
     };
-
-    const stackDir = isMobile ? 'column' : 'row'
 
     const buttonStyles = (): SpotButtonStyles => {
         switch (selectedSpot) {
@@ -28,7 +23,7 @@ const SpotSelection = ({onClick, selectedSpot}: Props) => {
     }
 
     return (
-        <Stack spacing={5} direction={stackDir} width={'100%'} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <Stack spacing={5} direction={'row'} width={'100%'} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             <Button
                 variant={buttonStyles().mdm.variant}
                 color='secondary'
@@ -65,4 +60,4 @@ const SpotSelection = ({onClick, selectedSpot}: Props) => {
     );
 };
 
-export default SpotSelection;
+export default observer (SpotSelection);

@@ -1,22 +1,23 @@
 import SpotSelection from "../components/SpotSelection";
-import {DyspoGenerator} from "./DyspoGenerator";
+import DyspoGenerator from "./DyspoGenerator";
 import ManualBadge from "../components/ManualBadge";
-import React, {useState} from "react";
-import SettingsBadge from "../components/SettingsBadge";
+import React from "react";
+import {useStore} from "../stores/store";
+import {observer} from "mobx-react-lite";
 
-export default function DesktopPage() {
-    const [selectedSpot, setSelectedSpot] = useState('');
+export default observer( function DesktopPage() {
+    const {commonStore} = useStore()
+    const {selectedSpot} = commonStore
 
     return (
         <>
-            <SpotSelection onClick={(spot) => setSelectedSpot(spot)} selectedSpot={selectedSpot}/>
+            <SpotSelection />
 
             <div className={`content ${selectedSpot ? 'expanded' : ''}`}>
-                <DyspoGenerator selectedSpot={selectedSpot}/>
+                <DyspoGenerator />
             </div>
 
-            <SettingsBadge />
             <ManualBadge />
         </>
         )
-}
+})
