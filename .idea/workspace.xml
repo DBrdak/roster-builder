@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9fa55efe-ee19-48ca-99f8-8442e70e7407" name="Changes" comment="Settings Feature Implementation 01">
+    <list default="true" id="9fa55efe-ee19-48ca-99f8-8442e70e7407" name="Changes" comment="Refactor 03">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SettingsBadge.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SettingsForm.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SettingsModal.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SpotSelection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SpotSelection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main_page/DesktopPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_page/DesktopPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main_page/DyspoGenerator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main_page/DyspoGenerator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/spreadSheetFactory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/spreadSheetFactory.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/spreadsheetSettings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/spreadsheetSettings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stores/commonStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/commonStore.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +117,9 @@
       <workItem from="1702304897202" duration="699000" />
       <workItem from="1702412183034" duration="52000" />
       <workItem from="1702429550100" duration="6774000" />
-      <workItem from="1702473558420" duration="6180000" />
+      <workItem from="1702473558420" duration="6296000" />
+      <workItem from="1704712671103" duration="10000" />
+      <workItem from="1704728494913" duration="649000" />
     </task>
     <task id="LOCAL-00001" summary="UI/UX Improved">
       <created>1701713698951</created>
@@ -202,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702436404478</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Refactor 03">
+      <created>1702480148396</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1702480148396</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,6 +221,7 @@
     <MESSAGE value="Logo change" />
     <MESSAGE value="Refactor 02" />
     <MESSAGE value="Settings Feature Implementation 01" />
-    <option name="LAST_COMMIT_MESSAGE" value="Settings Feature Implementation 01" />
+    <MESSAGE value="Refactor 03" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor 03" />
   </component>
 </project>

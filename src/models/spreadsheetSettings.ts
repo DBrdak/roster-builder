@@ -24,8 +24,9 @@ export class SpreadsheetSettings {
     private setD81Default(){
         const shifts: Shift[] = [
             {name: null, workingHours: {start: "8:00", end: '14:00'}},
-            {name: null, workingHours: {start: "9:00", end: '17:00'}},
-            {name: null, workingHours: {start: "13:45", end: '20:00'}},
+            {name: null, workingHours: {start: "9:00", end: '15:00'}},
+            {name: null, workingHours: {start: "14:00", end: '20:00'}},
+            {name: null, workingHours: {start: "15:00", end: '20:00'}},
         ]
 
         this.shifts.set('D81', shifts)

@@ -99,6 +99,7 @@ export default class SpreadsheetFactory {
 
                 this.shifts().forEach((shift, index) => {
                     worksheet.getCell(i + index, 1).value = `${shift.workingHours.start} - ${shift.workingHours.end} ${shift.name ? shift.name : ''}`
+                    worksheet.getCell(i + index, 1).alignment = {horizontal: 'center'}
                 })
 
                 isInit = false
@@ -148,7 +149,7 @@ export default class SpreadsheetFactory {
                 fgColor: {argb: 'FFFF0000'}
             };
 
-            if(isEventDay && this.isEventOnLastShift() && index === this.shifts().length - 1){
+            if(isEventDay && this.isEventOnLastShift() && index >= this.shifts().length - 2){
                 worksheet.getCell(weekId + 1 + index, dayOfWeekId + 1).fill = {
                     type: 'pattern',
                     pattern: 'solid',
