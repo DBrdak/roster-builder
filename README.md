@@ -1,4 +1,4 @@
-# Work arrangement builder
-## Visit here: dyspo.netlify.app
-### Simple app for arranging monthly schedule
-*Created for needs of my job in cafe
+# Roster builder
+## Visit here: https://dyspo.netlify.app
+### Simple app to create roster templates
+*Implemented to streamline management processes in coffeeshop
